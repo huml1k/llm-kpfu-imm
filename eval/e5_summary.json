@@ -1,0 +1,28 @@
+{
+  "v1": {
+    "counts": {
+      "ответ_v1": 40,
+      "верный_отказ": 3,
+      "выдумал_оффтоп": 7
+    },
+    "fact_found_true": 40,
+    "found_true": 47,
+    "found_false": 3,
+    "with_sources": 0,
+    "avg_tokens": 139,
+    "n": 50
+  },
+  "v2": {
+    "counts": {
+      "со_ссылкой": 32,
+      "не_нашёл": 8,
+      "верный_отказ": 10
+    },
+    "fact_found_true": 32,
+    "found_true": 32,
+    "found_false": 18,
+    "with_sources": 32,
+    "avg_tokens": 1094,
+    "n": 50
+  }
+}

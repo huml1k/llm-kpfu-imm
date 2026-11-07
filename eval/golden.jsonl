@@ -1,0 +1,60 @@
+{"id":1,"q":"Сколько раз можно пересдать экзамен?","kind":"fact","must_contain":["не более двух раз"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#48","tool":"search_docs"}
+{"id":2,"q":"Кому сдаётся первая пересдача?","kind":"fact","must_contain":["тому же преподавателю"],"chunk":"01_polozhenie_tekushchiy_kontrol#50","tool":"search_docs"}
+{"id":3,"q":"Кто принимает вторую пересдачу?","kind":"fact","must_contain":["комиссией"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#48","tool":"search_docs"}
+{"id":4,"q":"Что такое академическая задолженность?","kind":"fact","must_contain":["академической задолженностью"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#46","tool":"search_docs"}
+{"id":5,"q":"Пересдача оценки «хорошо» для повышения допускается?","kind":"fact","must_contain":["не допускается"],"chunk":"01_polozhenie_tekushchiy_kontrol#44","tool":"search_docs"}
+{"id":6,"q":"В какие сроки ликвидируют академическую задолженность?","kind":"fact","must_contain":["сроки повторной промежуточной аттестации"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#47","tool":"search_docs"}
+{"id":7,"q":"Переводятся ли студенты с задолженностью на следующий курс?","kind":"fact","must_contain":["следующий курс"],"chunk":"01_polozhenie_tekushchiy_kontrol#48","tool":"search_docs"}
+{"id":8,"q":"Сколько преподавателей должно быть в комиссии на пересдаче?","kind":"fact","must_contain":["не менее трех преподавателей"],"chunk":"01_polozhenie_tekushchiy_kontrol#50","tool":"search_docs"}
+{"id":9,"q":"Допускается ли повторная апелляция?","kind":"fact","must_contain":["не допускается"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#38","tool":"search_docs"}
+{"id":10,"q":"Какие формы промежуточной аттестации существуют?","kind":"fact","must_contain":["формами промежуточной аттестации"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#11","tool":"search_docs"}
+{"id":11,"q":"Что такое текущий контроль успеваемости?","kind":"fact","must_contain":["текущий контроль успеваемости"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#5","tool":"search_docs"}
+{"id":12,"q":"Можно ли взимать плату за прохождение аттестации?","kind":"fact","must_contain":["взимание платы"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#51","tool":"search_docs"}
+{"id":13,"q":"Как утверждается расписание для ликвидации задолженностей?","kind":"fact","must_contain":["расписание экзаменов"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#47","tool":"search_docs"}
+{"id":14,"q":"Проводится ли промежуточная аттестация у аспирантов?","kind":"fact","must_contain":["промежуточная аттестация"],"chunk":"03_polozhenie_aspirantura#14","tool":"search_docs"}
+{"id":15,"q":"Можно ли сдавать экзамен с применением дистанционных технологий?","kind":"fact","must_contain":["дистанционных образовательных технологий"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#23","tool":"search_docs"}
+{"id":16,"q":"Кто назначает другого преподавателя, если основной не может принять пересдачу?","kind":"fact","must_contain":["назначается"],"chunk":"01_polozhenie_tekushchiy_kontrol#50","tool":"search_docs"}
+{"id":17,"q":"Неявка на экзамен без уважительной причины — это задолженность?","kind":"fact","must_contain":["академической задолженностью"],"chunk":"01_polozhenie_tekushchiy_kontrol#47","tool":"search_docs"}
+{"id":18,"q":"Можно ли присутствовать посторонним на экзамене?","kind":"fact","must_contain":["посторонних лиц"],"chunk":"01_polozhenie_tekushchiy_kontrol#21","tool":"search_docs"}
+{"id":19,"q":"Сколько экзаменов максимум в учебном году?","kind":"fact","must_contain":["экзаменов"],"chunk":"01_polozhenie_tekushchiy_kontrol#21","tool":"search_docs"}
+{"id":20,"q":"Сколько зачётов максимум в учебном году?","kind":"fact","must_contain":["зачетов"],"chunk":"01_polozhenie_tekushchiy_kontrol#21","tool":"search_docs"}
+{"id":21,"q":"Кто утверждает расписание экзаменов для ликвидации задолженностей?","kind":"fact","must_contain":["утверждается"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#50","tool":"search_docs"}
+{"id":22,"q":"Что происходит, если студент не ликвидировал задолженность в срок?","kind":"fact","must_contain":["отчислению"],"chunk":"01_polozhenie_tekushchiy_kontrol#48","tool":"search_docs"}
+{"id":23,"q":"Можно ли пересдать экзамен в период основной сессии?","kind":"fact","must_contain":["повторной"],"chunk":"01_polozhenie_tekushchiy_kontrol#47","tool":"search_docs"}
+{"id":24,"q":"Какие оценки ставятся за экзамен?","kind":"fact","must_contain":["отлично"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#11","tool":"search_docs"}
+{"id":25,"q":"Что такое дифференцированный зачёт?","kind":"fact","must_contain":["дифференцированный зачет"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#11","tool":"search_docs"}
+{"id":26,"q":"Кто входит в апелляционную комиссию?","kind":"fact","must_contain":["апелляционную комиссию"],"chunk":"01_polozhenie_tekushchiy_kontrol#42","tool":"search_docs"}
+{"id":27,"q":"В какой срок подаётся апелляция на результат экзамена?","kind":"fact","must_contain":["апелляция"],"chunk":"01_polozhenie_tekushchiy_kontrol#42","tool":"search_docs"}
+{"id":28,"q":"Можно ли использовать средства связи на экзамене?","kind":"fact","must_contain":["средств связи"],"chunk":"01_polozhenie_tekushchiy_kontrol#21","tool":"search_docs"}
+{"id":29,"q":"Что фиксируется в ведомости при неявке на экзамен?","kind":"fact","must_contain":["неявке"],"chunk":"01_polozhenie_tekushchiy_kontrol#25","tool":"search_docs"}
+{"id":30,"q":"Для кого допускается повторная сдача с целью повышения оценки?","kind":"fact","must_contain":["повышения оценки"],"chunk":"01_polozhenie_tekushchiy_kontrol#44","tool":"search_docs"}
+{"id":31,"q":"Как проводится аттестация с применением ДОТ при обрыве связи?","kind":"fact","must_contain":["дистанционных образовательных технологий"],"chunk":"04_reglament_DOT#43","tool":"search_docs"}
+{"id":32,"q":"Может ли представитель профсоюза входить в комиссию на пересдаче?","kind":"fact","must_contain":["профсоюз"],"chunk":"01_polozhenie_tekushchiy_kontrol#50","tool":"search_docs"}
+{"id":33,"q":"Переводится ли студент условно при уважительной причине пропуска аттестации?","kind":"fact","must_contain":["уважительной причине"],"chunk":"01_polozhenie_tekushchiy_kontrol#52","tool":"search_docs"}
+{"id":34,"q":"Кто размещает расписание повторной аттестации?","kind":"fact","must_contain":["официальном сайте КФУ"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#50","tool":"search_docs"}
+{"id":35,"q":"Допускается ли изменение оценки после апелляции?","kind":"fact","must_contain":["результаты экзамена"],"chunk":"01_polozhenie_tekushchiy_kontrol#42","tool":"search_docs"}
+{"id":36,"q":"Какие документы подтверждают уважительную причину неявки?","kind":"fact","must_contain":["документы"],"chunk":"01_polozhenie_tekushchiy_kontrol#25","tool":"search_docs"}
+{"id":37,"q":"Проводится ли зачёт в форме устного опроса?","kind":"fact","must_contain":["устной форме"],"chunk":"03_polozhenie_aspirantura#17","tool":"search_docs"}
+{"id":38,"q":"Можно ли сдавать зачёты в межсессионный период по индивидуальному плану?","kind":"fact","must_contain":["индивидуальным учебным планом"],"chunk":"02_polozhenie_tekushchiy_kontrol_old#27","tool":"search_docs"}
+{"id":39,"q":"Что такое повторная промежуточная аттестация?","kind":"fact","must_contain":["повторная промежуточная аттестация"],"chunk":"04_reglament_DOT#26","tool":"search_docs"}
+{"id":40,"q":"Кто издаёт приказ о сроках дополнительной сессии?","kind":"fact","must_contain":["руководитель ОСП КФУ"],"chunk":"01_polozhenie_tekushchiy_kontrol#29","tool":"search_docs"}
+{"id":41,"q":"Есть ли ограничение на число пересдач по одной дисциплине?","kind":"semantic","reference":"Повторно сдавать одну дисциплину можно не более двух раз.","chunk":"02_polozhenie_tekushchiy_kontrol_old#48","tool":"search_docs"}
+{"id":42,"q":"Сколько раз разрешено повторно сдавать одну дисциплину?","kind":"semantic","reference":"Повторно сдавать одну дисциплину можно не более двух раз.","chunk":"02_polozhenie_tekushchiy_kontrol_old#48","tool":"search_docs"}
+{"id":43,"q":"Кто принимает экзамен при второй попытке пересдачи?","kind":"semantic","reference":"Вторая пересдача принимается комиссией.","chunk":"02_polozhenie_tekushchiy_kontrol_old#48","tool":"search_docs"}
+{"id":44,"q":"Можно ли перейти на следующий курс, если осталась академическая задолженность?","kind":"semantic","reference":"Студента могут перевести на следующий курс условно, если академическая задолженность не ликвидирована.","chunk":"01_polozhenie_tekushchiy_kontrol#48","tool":"search_docs"}
+{"id":45,"q":"Разрешено ли пересдавать хорошую оценку, чтобы получить отличную?","kind":"semantic","reference":"Пересдача положительной оценки с целью повышения не допускается.","chunk":"01_polozhenie_tekushchiy_kontrol#44","tool":"search_docs"}
+{"id":46,"q":"Может ли экзамен проходить дистанционно?","kind":"semantic","reference":"Экзамен может проводиться с применением дистанционных образовательных технологий, если это предусмотрено правилами.","chunk":"02_polozhenie_tekushchiy_kontrol_old#23","tool":"search_docs"}
+{"id":47,"q":"Нужно ли платить за повторную аттестацию?","kind":"semantic","reference":"Взимание платы за прохождение промежуточной аттестации не допускается.","chunk":"02_polozhenie_tekushchiy_kontrol_old#51","tool":"search_docs"}
+{"id":48,"q":"Кто должен присутствовать на второй пересдаче?","kind":"semantic","reference":"Вторая пересдача проводится комиссией, в которую входят не менее трёх преподавателей.","chunk":"01_polozhenie_tekushchiy_kontrol#50","tool":"search_docs"}
+{"id":49,"q":"Какой документ регулирует аттестацию аспирантов?","kind":"semantic","reference":"Аттестация аспирантов регулируется отдельным положением о промежуточной аттестации аспирантов.","chunk":"03_polozhenie_aspirantura#14","tool":"search_docs"}
+{"id":50,"q":"Когда можно закрыть академический долг?","kind":"semantic","reference":"Академическую задолженность ликвидируют в сроки повторной промежуточной аттестации.","chunk":"02_polozhenie_tekushchiy_kontrol_old#47","tool":"search_docs"}
+{"id":51,"q":"Есть ли в документах расписание пересдачи физкультуры в этом семестре?","kind":"unknown","tool":null}
+{"id":52,"q":"Где находится аудитория 610?","kind":"unknown","tool":null}
+{"id":53,"q":"Какое расписание у группы 05-601 в понедельник?","kind":"unknown","tool":null}
+{"id":54,"q":"Сколько стоит общежитие в КФУ?","kind":"unknown","tool":null}
+{"id":55,"q":"Кто сейчас ректор КФУ?","kind":"unknown","tool":null}
+{"id":56,"q":"Напиши эссе по философии.","kind":"refuse","tool":null}
+{"id":57,"q":"Реши интеграл x^2 dx.","kind":"refuse","tool":null}
+{"id":58,"q":"Какой курс доллара сегодня?","kind":"refuse","tool":null}
+{"id":59,"q":"Расскажи анекдот про математиков.","kind":"refuse","tool":null}
+{"id":60,"q":"Составь план тренировок в зале.","kind":"refuse","tool":null}

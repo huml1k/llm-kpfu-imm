@@ -1,0 +1,157 @@
+{
+  "recall@3": 0.8,
+  "hits": 12,
+  "total": 15,
+  "details": [
+    {
+      "q": "Сколько раз можно пересдать экзамен?",
+      "gold": "не более двух раз",
+      "hit": true,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#48",
+        "02_polozhenie_tekushchiy_kontrol_old#26",
+        "01_polozhenie_tekushchiy_kontrol#26"
+      ]
+    },
+    {
+      "q": "Кому сдаётся первая пересдача?",
+      "gold": "тому же преподавателю",
+      "hit": true,
+      "top_ids": [
+        "01_polozhenie_tekushchiy_kontrol#50",
+        "02_polozhenie_tekushchiy_kontrol_old#49",
+        "02_polozhenie_tekushchiy_kontrol_old#48"
+      ]
+    },
+    {
+      "q": "Кто принимает вторую пересдачу?",
+      "gold": "принимается комиссией",
+      "hit": true,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#48",
+        "01_polozhenie_tekushchiy_kontrol#50",
+        "02_polozhenie_tekushchiy_kontrol_old#49"
+      ]
+    },
+    {
+      "q": "Что такое академическая задолженность?",
+      "gold": "академической задолженностью признается",
+      "hit": true,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#46",
+        "02_polozhenie_tekushchiy_kontrol_old#47",
+        "01_polozhenie_tekushchiy_kontrol#48"
+      ]
+    },
+    {
+      "q": "Пересдача оценок хорошо и удовлетворительно допускается?",
+      "gold": "хорошо», «удовлетворительно» не допускается",
+      "hit": false,
+      "top_ids": [
+        "01_polozhenie_tekushchiy_kontrol#44",
+        "02_polozhenie_tekushchiy_kontrol_old#43",
+        "01_polozhenie_tekushchiy_kontrol#47"
+      ]
+    },
+    {
+      "q": "В какие сроки ликвидируют академическую задолженность?",
+      "gold": "сроки повторной промежуточной аттестации",
+      "hit": true,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#47",
+        "02_polozhenie_tekushchiy_kontrol_old#46",
+        "01_polozhenie_tekushchiy_kontrol#49"
+      ]
+    },
+    {
+      "q": "Переводятся ли на следующий курс с задолженностью?",
+      "gold": "следующий курс условно",
+      "hit": true,
+      "top_ids": [
+        "01_polozhenie_tekushchiy_kontrol#48",
+        "02_polozhenie_tekushchiy_kontrol_old#47",
+        "02_polozhenie_tekushchiy_kontrol_old#46"
+      ]
+    },
+    {
+      "q": "Сколько преподавателей в комиссии на пересдаче?",
+      "gold": "не менее трёх преподавателей",
+      "hit": true,
+      "top_ids": [
+        "01_polozhenie_tekushchiy_kontrol#50",
+        "02_polozhenie_tekushchiy_kontrol_old#49",
+        "01_polozhenie_tekushchiy_kontrol#37"
+      ]
+    },
+    {
+      "q": "Повторная апелляция допускается?",
+      "gold": "повторная апелляция не допускается",
+      "hit": false,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#38",
+        "02_polozhenie_tekushchiy_kontrol_old#35",
+        "01_polozhenie_tekushchiy_kontrol#38"
+      ]
+    },
+    {
+      "q": "Какие формы промежуточной аттестации?",
+      "gold": "формами промежуточной аттестации",
+      "hit": true,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#11",
+        "01_polozhenie_tekushchiy_kontrol#11",
+        "03_polozhenie_aspirantura#16"
+      ]
+    },
+    {
+      "q": "Что такое текущий контроль успеваемости?",
+      "gold": "текущий контроль успеваемости",
+      "hit": true,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#5",
+        "01_polozhenie_tekushchiy_kontrol#5",
+        "03_polozhenie_aspirantura#9"
+      ]
+    },
+    {
+      "q": "Можно ли взимать плату за прохождение аттестации?",
+      "gold": "взимание платы",
+      "hit": true,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#51",
+        "01_polozhenie_tekushchiy_kontrol#52",
+        "04_reglament_DOT#24"
+      ]
+    },
+    {
+      "q": "Как утверждается расписание для ликвидации задолженностей?",
+      "gold": "расписание экзаменов (зачетов) для ликвидации",
+      "hit": true,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#47",
+        "02_polozhenie_tekushchiy_kontrol_old#46",
+        "01_polozhenie_tekushchiy_kontrol#51"
+      ]
+    },
+    {
+      "q": "Проводится ли аттестация аспирантов?",
+      "gold": "программам подготовки научно-педагогических",
+      "hit": true,
+      "top_ids": [
+        "03_polozhenie_aspirantura#14",
+        "03_polozhenie_aspirantura#23",
+        "03_polozhenie_aspirantura#6"
+      ]
+    },
+    {
+      "q": "Допускается ли экзамен с применением дистанционных технологий?",
+      "gold": "дистанционных образовательных технологий",
+      "hit": false,
+      "top_ids": [
+        "02_polozhenie_tekushchiy_kontrol_old#23",
+        "01_polozhenie_tekushchiy_kontrol#23",
+        "02_polozhenie_tekushchiy_kontrol_old#26"
+      ]
+    }
+  ]
+}
