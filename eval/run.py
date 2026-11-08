@@ -19,7 +19,8 @@ from eval.judge import judge
 
 EVAL = ROOT / "eval"
 GOLDEN = EVAL / "golden.jsonl"
-CACHE = EVAL / "responses_cache.json"
+RESULTS = ROOT / "data" / "evaluation" / "rag_v1_v2"
+CACHE = RESULTS / "responses_cache.json"
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -41,6 +42,7 @@ def load_json(path: Path, default: Any) -> Any:
 
 
 def write_json(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
@@ -161,10 +163,8 @@ def print_summary(summary: dict, previous: dict | None) -> None:
     print(f"partial ({len(summary['partial_ids'])}): {summary['partial_ids']}")
 
 
-async def main(version: str) -> None:
-    items = read_jsonl(GOLDEN)
-    if len(items) != 60:
-        raise ValueError(f"golden set must contain 60 items, got {len(items)}")
+async def main(version: str, golden: Path = GOLDEN) -> None:
+    items = [item for item in read_jsonl(golden) if "turns" not in item]
     if {item["kind"] for item in items} != {"fact", "semantic", "unknown", "refuse"}:
         raise ValueError("golden set must contain fact, semantic, unknown and refuse")
 
@@ -175,12 +175,12 @@ async def main(version: str) -> None:
         rows.append(await run_item(version, item, cache))
     write_json(CACHE, cache)
 
-    raw_path = EVAL / f"results_raw_{version}.jsonl"
+    raw_path = RESULTS / f"results_raw_{version}.jsonl"
     raw_text = "\n".join(json.dumps(row, ensure_ascii=False) for row in rows) + "\n"
     raw_path.write_text(raw_text, encoding="utf-8")
-    (EVAL / "results_raw.jsonl").write_text(raw_text, encoding="utf-8")
+    (RESULTS / "results_raw.jsonl").write_text(raw_text, encoding="utf-8")
     summary = summarize(rows, version)
-    result_path = EVAL / f"results_{version}.json"
+    result_path = RESULTS / f"results_{version}.json"
     previous = load_json(result_path, None)
     write_json(result_path, summary)
     print_summary(summary, previous)
@@ -188,6 +188,18 @@ async def main(version: str) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--version", choices=["v1", "v2"], required=True)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--version", choices=["v1", "v2"], help="Прежний эксперимент без RAG / с RAG")
+    mode.add_argument("--memory", choices=["without", "with", "compare"], help="Новый эксперимент E1–E5 с памятью")
+    parser.add_argument("--golden", type=Path, default=GOLDEN)
+    parser.add_argument("--output", type=Path, default=ROOT / "data" / "evaluation" / "memory")
     args = parser.parse_args()
-    asyncio.run(main(args.version))
+    if args.memory:
+        from model_api import missing_settings
+        missing = missing_settings()
+        if missing:
+            parser.error("Заполните настройки в .env: " + ", ".join(missing))
+        from eval.memory_run import run
+        asyncio.run(run(args.memory, args.golden, args.output))
+    else:
+        asyncio.run(main(args.version, args.golden))

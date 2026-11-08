@@ -1,11 +1,9 @@
 .venv/
+.venv-win/
 __pycache__/
 *.py[cod]
 .env
-eval/responses_cache.json
-eval/results_raw.jsonl
-eval/results_raw_v1.jsonl
-eval/results_raw_v2.jsonl
-eval/results_v1.json
-eval/results_v2.json
-eval/judge_calibration_results.json
+data/
+.~lock.*#
+.presentation_*/
+.chart-data-*/

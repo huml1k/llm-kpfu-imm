@@ -28,7 +28,9 @@ async def main() -> None:
         results.append(result)
     agree = sum(row["agree"] for row in results) / len(results)
     output = {"n": len(results), "agreement": round(agree, 3), "results": results}
-    (ROOT / "eval" / "judge_calibration_results.json").write_text(
+    output_path = ROOT / "data" / "evaluation" / "judge" / "judge_calibration_results.json"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
         json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(f"agreement={agree:.1%} ({sum(row['agree'] for row in results)}/{len(results)})")

@@ -13,7 +13,10 @@ from typing import Any, Literal
 import httpx
 from pydantic import BaseModel, PrivateAttr, field_validator
 
+import app_config  # Initialize settings also for callers using this module directly.
+from telemetry import before_api_request
 from search_core import search, format_hits, THRESHOLD
+from model_api import CHAT_URL, headers, redact_error, chat_payload
 
 HERE = Path(__file__).resolve().parent
 
@@ -48,11 +51,10 @@ JUDGE_PROMPT = """Ты проверяешь ответ учебного RAG-бо
 Числа, даты, ограничения и отрицания, если они являются сутью вопроса, должны совпадать.
 Верни только JSON: {"verdict":"correct|partial|wrong","reason":"одна краткая фраза"}"""
 
-# Ключ: лучше задавать переменной окружения OPENROUTER_API_KEY.
-# Если вставляете прямо в код, замените заглушку и не отправляйте файл никому.
+# Ключ берётся из окружения или локального .env.
 API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 MODEL = os.environ.get("OPENROUTER_MODEL", "openai/gpt-4o-mini")
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
+API_URL = CHAT_URL
 
 NOT_FOUND = (
     "В предоставленных документах этого нет. "
@@ -97,27 +99,18 @@ def extract_json(text: str) -> str:
 async def llm(
     messages: list[dict], *, model: str | None = None, max_tokens: int = 600
 ) -> tuple[str, dict]:
-    payload = {
-        "model": model or MODEL,
-        "messages": messages,
-        "temperature": 0.0,
-        "max_tokens": max_tokens,
-        "response_format": {"type": "json_object"},
-    }
+    request_headers = headers(API_URL, API_KEY)
+    payload = chat_payload(messages, model or MODEL, max_tokens)
     async with httpx.AsyncClient(timeout=30.0) as c:
+        before_api_request("chat")
         resp = await c.post(
             API_URL,
-            headers={
-                "Authorization": f"Bearer {API_KEY}",
-                "Content-Type": "application/json",
-                "HTTP-Referer": "https://kpfu.ru",
-                "X-Title": "KFU-RAG-Agent",
-            },
+            headers=request_headers,
             json=payload,
         )
 
     if resp.status_code != 200:
-        raise RuntimeError(f"API Error {resp.status_code}: {resp.text[:300]}")
+        raise RuntimeError(f"API Error {resp.status_code}: {redact_error(resp.text)[:300]}")
 
     data = resp.json()
     text = data["choices"][0]["message"]["content"] or ""
@@ -143,7 +136,9 @@ def keywords(q: str) -> str:
 
 
 async def agent_loop(
-    question: str, max_iterations: int = 3
+    question: str, max_iterations: int = 3, *, search_query: str | None = None,
+    context_messages: list[dict] | None = None, system_prompt: str | None = None,
+    complete=None, search_fn=None, trace: list | None = None,
 ) -> tuple[Answer, dict, list]:
     """
     E2 + E4: цикл агента.
@@ -155,7 +150,10 @@ async def agent_loop(
     Возвращает (ответ, usage + iterations, куски последней попытки).
     """
     usage_sum = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
-    attempts = [(question, 3), (question, 6), (keywords(question), 6)]
+    query = search_query or question
+    attempts = [(query, 3), (query, 6), (keywords(query), 6)]
+    complete = complete or llm
+    search_fn = search_fn or search
 
     last_ans: Answer | None = None
     last_hits: list = []
@@ -168,22 +166,31 @@ async def agent_loop(
     for query, k in attempts[:max_iterations]:
         iterations += 1
         try:
-            hits = search(query, k=k, threshold=THRESHOLD)
+            if trace is not None:
+                trace.append({"tool": "search_docs", "query": query, "k": k, "hit_ids": []})
+            hits = search_fn(query, k=k, threshold=THRESHOLD)
+            if trace is not None:
+                trace[-1]["hit_ids"] = [c[0]["id"] for c in hits]
             if not hits:
                 continue  # без найденных кусков модель не зовём
 
             messages = [
-                {"role": "system", "content": SYSTEM_V2},
+                {"role": "system", "content": system_prompt or SYSTEM_V2},
                 {"role": "system", "content": "Найденные куски:\n\n" + format_hits(hits)},
+                *(context_messages or []),
                 {"role": "user", "content": question},
             ]
-            text, usage = await llm(messages)
+            text, usage = await complete(messages)
 
             # E4: накопление токенов по всем итерациям
             for key in ("prompt_tokens", "completion_tokens", "total_tokens"):
                 usage_sum[key] += usage.get(key, 0)
 
             ans = Answer.model_validate_json(extract_json(text))
+            if ans.found and (not ans.sources or any(i < 1 or i > len(hits) for i in ans.sources)):
+                raise ValueError("Ссылка вне текущей выдачи")
+            if not ans.found:
+                ans.sources = []
             ans._json_valid = True
             last_ans, last_hits = ans, hits
 
@@ -196,22 +203,22 @@ async def agent_loop(
             continue
         except Exception as e:
             # E4: сбои сети, API или поиска не роняют агента
-            return finish(
-                Answer(answer=f"Техническая ошибка: {str(e)[:100]}", sources=[], found=False),
-                last_hits,
-            )
+            usage_sum["error"] = type(e).__name__
+            failed = Answer(answer="Техническая ошибка поиска или модели. Попробуйте позже.", sources=[], found=False)
+            failed._json_valid = False
+            return finish(failed, last_hits)
 
     if last_ans is not None:
         return finish(last_ans, last_hits)
     if json_errors:
-        return finish(
-            Answer(
+        usage_sum["error"] = "InvalidModelResponse"
+        failed = Answer(
                 answer="Системная ошибка: не удалось получить корректный JSON-ответ от модели.",
                 sources=[],
                 found=False,
-            ),
-            [],
-        )
+            )
+        failed._json_valid = False
+        return finish(failed, [])
     return finish(Answer(answer=NOT_FOUND, sources=[], found=False), [])
 
 
@@ -281,6 +288,12 @@ async def ask_v2(question: str) -> tuple[Answer, dict, list]:
         ans._json_valid = False
 
     return ans, usage, hits
+
+
+async def agent(question: str, session_id: str, user_id: str, **kwargs):
+    """Session-aware entry point; legacy ask_v1/ask_v2 remain available."""
+    from memory_agent import agent as memory_agent
+    return await memory_agent(question, session_id, user_id, **kwargs)
 
 
 if __name__ == "__main__":

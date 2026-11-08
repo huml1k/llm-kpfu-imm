@@ -1,16 +1,17 @@
 """Сравнение сохранённых результатов v1 и v2 для таблицы E4."""
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-EVAL = ROOT / "eval"
+RESULTS = ROOT / "data" / "evaluation" / "rag_v1_v2"
 METRICS = ["json_valid", "recall@3", "tool_ok", "fact_ok", "semantic_ok", "unknown_ok", "refuse_ok", "honest"]
 
 
-def main() -> None:
-    paths = {version: EVAL / f"results_{version}.json" for version in ("v1", "v2")}
+def main(results_dir: Path = RESULTS) -> None:
+    paths = {version: results_dir / f"results_{version}.json" for version in ("v1", "v2")}
     missing = [str(path) for path in paths.values() if not path.exists()]
     if missing:
         raise SystemExit("Сначала запустите обе версии: " + ", ".join(missing))
@@ -26,7 +27,7 @@ def main() -> None:
         "v2": results["v2"],
         "comparison": rows,
     }
-    (EVAL / "results_compare.json").write_text(
+    (results_dir / "results_compare.json").write_text(
         json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print("metric              v1          v2          delta")
@@ -38,4 +39,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Сравнить сохранённые результаты без вызова API")
+    parser.add_argument("--results-dir", type=Path, default=RESULTS)
+    main(parser.parse_args().results_dir)

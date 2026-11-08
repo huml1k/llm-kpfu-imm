@@ -7,10 +7,9 @@ from pathlib import Path
 import numpy as np
 
 from embed_utils import embed
+from index_settings import INDEX_NPY, META_JSON, validate_index
 
 HERE = Path(__file__).resolve().parent
-INDEX_NPY = HERE / "index" / "index.npy"
-META_JSON = HERE / "index" / "meta.json"
 
 THRESHOLD = 0.28  # ниже — считаем «ничего похожего»
 
@@ -18,12 +17,15 @@ THRESHOLD = 0.28  # ниже — считаем «ничего похожего�
 def load_index():
     E = np.load(INDEX_NPY)
     chunks = json.loads(META_JSON.read_text(encoding="utf-8"))
+    validate_index(E, chunks)
     return E, chunks
 
 
 def search(query: str, k: int = 3, threshold: float = THRESHOLD):
     E, chunks = load_index()
-    v = embed([query])[0]
+    v = embed([query], task="query")[0]
+    if v.shape != (E.shape[1],):
+        raise ValueError("Размерность вектора запроса не совпадает с индексом. Перестройте индекс выбранной моделью.")
     scores = E @ v
     top = np.argsort(-scores)[:k]
     hits = []
