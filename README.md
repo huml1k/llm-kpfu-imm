@@ -28,15 +28,12 @@ python chat.py
 Вопросы, ответы и фактические отправки сохраняются в `data/manual_dialogues.jsonl`.
 SQLite находится в `data/rag.sqlite3`, если в `.env` не выбран другой путь.
 
-## Наглядный прогон E1–E5 для отчёта
-
-Сюжет: Анна готовится к пересдаче математического анализа, сообщает группу и курс,
-продолжает разговор в новой сессии. Затем проверяем защиту памяти.
+## Как запустить проект
 
 В PowerShell запусти:
 
 ```powershell
-python chat.py --user-id anna_demo --session-id exam --max-api-calls 18
+python chat.py --user-id сам_придумай --session-id сам_придумай  --max-api-calls макс_кол-во_запросов
 ```
 
 В `data/manual_dialogues.jsonl` сохраняются вопросы, подготовленные отправки,
